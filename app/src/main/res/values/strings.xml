@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DictionaryPJ</string>
+    <string name="input_letter">Input Letter</string>
+    <string name="go">Go</string>
 </resources>

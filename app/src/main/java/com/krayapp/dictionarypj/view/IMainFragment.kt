@@ -5,4 +5,5 @@ import com.krayapp.dictionarypj.data.LetterInfo
 
 interface IMainFragment {
     fun showLetterInfo(list:List<AboutLetter>)
+    fun showRecycler()
 }
