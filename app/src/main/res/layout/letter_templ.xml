@@ -25,5 +25,5 @@
         android:layout_marginEnd="10dp"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="@color/transparentBlack"/>
+        android:background="?bottomBorderColor"/>
 </LinearLayout>
