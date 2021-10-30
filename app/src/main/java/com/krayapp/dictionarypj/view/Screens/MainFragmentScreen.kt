@@ -6,5 +6,9 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.krayapp.dictionarypj.view.MainFragment
 
 object MainFragmentScreen :FragmentScreen{
-    override fun createFragment(factory: FragmentFactory): Fragment = MainFragment.newInstance()
+    private val tester = "123"
+    override fun createFragment(factory: FragmentFactory): Fragment {
+        println(tester)
+        return MainFragment.newInstance()
+    }
 }
