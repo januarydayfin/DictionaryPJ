@@ -32,7 +32,7 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
         viewBinding.letterRecycler.adapter = mainFragmentAdapter
 
         viewBinding.loadButton.setOnClickListener {
-            viewBinding.load.root.visibility = View.VISIBLE
+            showLoading()
             viewBinding.letterRecycler.visibility = View.VISIBLE
             val text = viewBinding.inputText.text.toString()
             if (!text.equals("")) {
@@ -42,6 +42,7 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
             } else {
                 Toast.makeText(context, "Letter field is empty", Toast.LENGTH_SHORT).show()
                 viewBinding.inputText.hint = "Letter is empty"
+                viewBinding.load.root.visibility = View.INVISIBLE
             }
         }
     }
@@ -52,6 +53,8 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
     }
 
     override fun showLoading() {
+        viewBinding.load.root.visibility = View.VISIBLE
+
     }
 
     private fun showRecycler() {
