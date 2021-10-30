@@ -5,5 +5,5 @@ import io.reactivex.Observable
 
 
 interface ILetterRepo {
-    fun getLetterInfo(letter:String):Observable<LetterInfo>
+    fun getLetterInfo(letter:String):Observable<List<LetterInfo>>
 }

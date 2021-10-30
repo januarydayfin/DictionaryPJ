@@ -7,6 +7,6 @@ import io.reactivex.Observable
 class LetterRepoImpl(
     private val api:RemoteAccess
 ):ILetterRepo {
-    override fun getLetterInfo(letter: String): Observable<LetterInfo> =
+    override fun getLetterInfo(letter: String): Observable<List<LetterInfo>> =
        api.getLetterInfo(letter)
 }

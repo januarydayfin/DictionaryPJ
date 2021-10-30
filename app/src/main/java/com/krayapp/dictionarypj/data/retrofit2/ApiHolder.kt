@@ -11,9 +11,7 @@ object ApiHolder {
             .baseUrl("https://dictionary.skyeng.ru/api/public/v1/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(
-                GsonConverterFactory.create(
-                    GsonBuilder().setLenient().create()
-                )
+                GsonConverterFactory.create()
             )
             .build()
             .create(RemoteAccess::class.java)

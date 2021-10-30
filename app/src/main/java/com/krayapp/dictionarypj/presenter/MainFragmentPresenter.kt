@@ -15,26 +15,29 @@ class MainFragmentPresenter(
     private var disposables = CompositeDisposable()
 
     private val schedulers = MySchedulers()
-    private val list = mutableListOf<AboutLetter>()
     override fun loadLetterInfo(letter: String) {
         repo.getLetterInfo(letter)
             .map(::convertToSimple)
-            .doOnNext { info -> list.add(info) }
             .observeOn(schedulers.main())
-            .doOnComplete {
-                view.showLetterInfo(list)
-                view.showRecycler()
-            }
+            .doOnNext(view::showLetterInfo)
+            .doOnError{error -> println("Retrofit Error $error")}
             .subscribeOn(schedulers.io())
             .subscribe()
             .addTo(disposables)
     }
 
+
+
     override fun onStop() {
         disposables.dispose()
-        list.clear()
     }
 
-    private fun convertToSimple(letterInfo: LetterInfo): AboutLetter =
-        AboutLetter(letterInfo.text!!, letterInfo.meanings[0].translation[0].text!!)
+    private fun convertToSimple(letterInfo: List<LetterInfo>): List<AboutLetter> {
+        val newList = mutableListOf<AboutLetter>()
+        letterInfo.forEach {
+            newList.add(AboutLetter(it.text!!, it.meanings?.get(0)?.translation?.text!!))
+        }
+        return newList
+    }
+
 }

@@ -5,10 +5,11 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RemoteAccess {
-    @GET("words/search?search={letter}")
+    @GET("words/search")
     fun getLetterInfo(
-        @Path ("letter")letter:String
-    ):Observable<LetterInfo>
+        @Query ("search")search:String
+    ):Observable<List<LetterInfo>>
 }

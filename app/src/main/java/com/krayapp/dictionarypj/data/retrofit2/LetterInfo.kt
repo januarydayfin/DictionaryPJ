@@ -9,12 +9,13 @@ data class LetterInfo(
     @Expose
     val text: String?,
     @Expose
-    val meanings: List<LetterMeanings>
+    val meanings: List<LetterMeanings>?
 ): Parcelable
+
 @Parcelize
 data class LetterMeanings(
     @Expose
-    val translation: List<LetterTranslation>
+    val translation: LetterTranslation
 ):Parcelable
 
 @Parcelize
