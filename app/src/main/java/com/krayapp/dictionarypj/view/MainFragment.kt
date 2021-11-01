@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.main_fragment
 import com.krayapp.dictionarypj.data.AboutLetter
-import com.krayapp.dictionarypj.data.LetterRepoImpl
-import com.krayapp.dictionarypj.data.retrofit2.ApiHolder
+import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.databinding.MainFragmentBinding
 import com.krayapp.dictionarypj.presenter.MainFragmentPresenter
 import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
