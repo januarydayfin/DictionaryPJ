@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.presenter
+package com.krayapp.dictionarypj.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,9 +12,10 @@ import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class MainFragmentViewModel
-    : ViewModel(), IMainViewModel {
-    private lateinit var repo: ILetterRepo
-    private lateinit var schedulers: ISchedulers
+@Inject constructor(
+    private val repo: ILetterRepo,
+    private val schedulers: ISchedulers
+) : ViewModel() {
 
     private var disposables = CompositeDisposable()
 
@@ -34,10 +35,6 @@ class MainFragmentViewModel
 
     }
 
-    fun setRepos(repo: ILetterRepo, schedulers: ISchedulers) {
-        this.repo = repo
-        this.schedulers = schedulers
-    }
 
     private fun convertToSimple(letterInfo: List<LetterInfo>): List<AboutLetter> {
         val newList = mutableListOf<AboutLetter>()
@@ -47,5 +44,8 @@ class MainFragmentViewModel
         return newList
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        disposables.dispose()
+    }
 }
