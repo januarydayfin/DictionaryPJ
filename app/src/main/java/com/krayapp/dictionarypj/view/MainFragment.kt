@@ -12,23 +12,17 @@ import com.krayapp.dictionarypj.databinding.MainFragmentBinding
 import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
 import com.krayapp.dictionarypj.viewmodel.MainFragmentViewModel
 import com.krayapp.movieapppoplib.view.abs.AbsFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import javax.inject.Inject
 
-class MainFragment : IMainFragment, AbsFragment(main_fragment) {
+class MainFragment : IMainFragment, Fragment(main_fragment) {
     companion object {
         fun newInstance(): Fragment {
             return MainFragment()
         }
     }
 
-    @Inject
-    lateinit var modelFactory:ViewModelProvider.Factory
-    private lateinit var mainFragmentViewModel:MainFragmentViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mainFragmentViewModel = ViewModelProvider(this,modelFactory)[MainFragmentViewModel::class.java]
-    }
+    private val mainFragmentViewModel:MainFragmentViewModel by viewModel()
 
     private val viewBinding: MainFragmentBinding by viewBinding()
     private val mainFragmentAdapter = MainFragmentAdapter()

@@ -5,8 +5,7 @@ import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class LetterRepoImpl
-    @Inject constructor(
+class LetterRepoImpl(
     private val api:RemoteAccess
 ):ILetterRepo {
     override fun getLetterInfo(letter: String): Observable<List<LetterInfo>> =

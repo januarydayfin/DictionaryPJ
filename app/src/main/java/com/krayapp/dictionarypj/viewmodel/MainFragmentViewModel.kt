@@ -11,8 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
-class MainFragmentViewModel
-@Inject constructor(
+class MainFragmentViewModel(
     private val repo: ILetterRepo,
     private val schedulers: ISchedulers
 ) : ViewModel() {

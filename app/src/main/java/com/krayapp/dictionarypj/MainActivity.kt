@@ -3,23 +3,23 @@ package com.krayapp.dictionarypj
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.krayapp.dictionarypj.view.Screens.MainFragmentScreen
 import com.krayapp.dictionarypj.R.menu.*
 import com.krayapp.movieapppoplib.view.abs.AbsActivity
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 
-class MainActivity : AbsActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val navigator = AppNavigator(this, android.R.id.content)
 
-    @Inject
-    lateinit var navigationHolder: NavigatorHolder
+    private val navigationHolder:NavigatorHolder by inject()
+    private val router:Router by inject()
 
-    @Inject
-    lateinit var router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
