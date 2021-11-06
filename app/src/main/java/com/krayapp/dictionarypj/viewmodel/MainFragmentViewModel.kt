@@ -3,34 +3,46 @@ package com.krayapp.dictionarypj.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.krayapp.dictionarypj.ISchedulers
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.data.LetterInfo
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainFragmentViewModel(
-    private val repo: ILetterRepo,
-    private val schedulers: ISchedulers
-) : ViewModel() {
+    private val repo: ILetterRepo) : ViewModel() {
 
     private var disposables = CompositeDisposable()
+
+    private val dataScope = CoroutineScope(Dispatchers.IO)
 
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
     val mutableLiveData: LiveData<List<AboutLetter>>
         get() = _mutableLiveData
 
     fun getData(letter: String) {
-        repo.getLetterInfo(letter)
-            .map(::convertToSimple)
-            .observeOn(schedulers.main())
-            .doOnNext(_mutableLiveData::postValue)
-            .doOnError { error -> println("Retrofit Error $error") }
-            .subscribeOn(schedulers.io())
-            .subscribe()
-            .addTo(disposables)
+        dataScope.launch {
+            repo.getLetterInfo(letter, callback)
+        }
+    }
+
+    private val callback = object : Callback<List<LetterInfo>> {
+        override fun onResponse(
+            call: Call<List<LetterInfo>>,
+            response: Response<List<LetterInfo>>
+        ) {
+            val simpleList = convertToSimple(response.body()!!)
+            _mutableLiveData.postValue(simpleList)
+        }
+
+        override fun onFailure(call: Call<List<LetterInfo>>, t: Throwable) {
+            println(t)
+        }
 
     }
 

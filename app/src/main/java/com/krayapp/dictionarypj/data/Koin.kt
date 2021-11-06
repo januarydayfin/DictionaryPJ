@@ -3,8 +3,6 @@ package com.krayapp.dictionarypj.data
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import com.krayapp.dictionarypj.ISchedulers
-import com.krayapp.dictionarypj.MySchedulers
 import com.krayapp.dictionarypj.data.dagger.module.RemoteApiModule
 import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
 import com.krayapp.dictionarypj.viewmodel.MainFragmentViewModel
@@ -16,7 +14,6 @@ object Koin {
     fun getModule() = module {
         single<RemoteAccess> { RemoteApiModule().getFromApi() }
         single<ILetterRepo> { LetterRepoImpl(api = get()) }
-        single<ISchedulers> { MySchedulers() }
         single<NavigatorHolder> {
             cicerone
                 .getNavigatorHolder()
@@ -24,6 +21,6 @@ object Koin {
         single<Router>{
             cicerone.router
         }
-        viewModel { MainFragmentViewModel(repo = get(), schedulers = get()) }
+        viewModel { MainFragmentViewModel(repo = get()) }
     }
 }

@@ -16,7 +16,6 @@ class RemoteApiModule {
     fun getFromApi(): RemoteAccess =
         Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(
                 GsonConverterFactory.create()
             )
