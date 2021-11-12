@@ -8,19 +8,17 @@ import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.data.LetterInfo
 import com.krayapp.dictionarypj.data.room.LetterDataBase
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AboutLetterViewModel(
     private val repo: ILetterRepo,
-    private val database:LetterDataBase
-    ) : ViewModel() {
-    private var disposables = CompositeDisposable()
+    private val database: LetterDataBase
+) : ViewModel() {
     private val dataScope = CoroutineScope(Dispatchers.IO)
+    private var baseJob: Job? = null
 
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
     val mutableLiveData: LiveData<List<AboutLetter>>
@@ -48,6 +46,16 @@ class AboutLetterViewModel(
     }
 
 
+    fun insertToDataBase(letter: AboutLetter) {
+        baseJob?.cancel()
+        baseJob =
+            CoroutineScope(Dispatchers.IO)
+                .launch {
+                    if (isActive)
+                        database.letterDao().insertLetter(letter)
+                }
+    }
+
     private fun convertToSimple(letterInfo: List<LetterInfo>): List<AboutLetter> {
         val newList = mutableListOf<AboutLetter>()
         letterInfo.forEach {
@@ -58,6 +66,6 @@ class AboutLetterViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        disposables.dispose()
+        baseJob?.cancel()
     }
 }

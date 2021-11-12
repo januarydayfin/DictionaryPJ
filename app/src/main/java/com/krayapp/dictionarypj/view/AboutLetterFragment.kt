@@ -2,6 +2,7 @@ package com.krayapp.dictionarypj.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -24,7 +25,7 @@ class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
 
     private val aboutLetterViewModel:AboutLetterViewModel by viewModel()
     private val viewBinding: MainFragmentBinding by viewBinding()
-    private val mainFragmentAdapter = AboutLetterAdapter()
+    private val aboutLetterAdapter = AboutLetterAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoading()
-        viewBinding.letterRecycler.adapter = mainFragmentAdapter
+        viewBinding.letterRecycler.adapter = aboutLetterAdapter
         aboutLetterViewModel.mutableLiveData.observe(viewLifecycleOwner, {
             showLetterInfo(it)
             showRecycler()
@@ -41,9 +42,14 @@ class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
     }
 
     override fun showLetterInfo(list: List<AboutLetter>) {
-        //тут можно взять первый элемент и вставить в базу
-        mainFragmentAdapter.submitList(list)
-        showRecycler()
+        if(!list.isEmpty()){
+            aboutLetterViewModel.insertToDataBase(list.first())
+            aboutLetterAdapter.submitList(list)
+            showRecycler()
+        }else{
+            Toast.makeText(context,"Не удалось загрузить информацию,либо некорректный ввод", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun showLoading() {
