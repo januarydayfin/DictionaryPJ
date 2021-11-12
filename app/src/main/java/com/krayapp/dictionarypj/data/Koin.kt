@@ -5,6 +5,7 @@ import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
+import com.krayapp.dictionarypj.data.retrofit2.RemoteApiModule
 import com.krayapp.dictionarypj.data.room.ILetterDataBase
 import com.krayapp.dictionarypj.data.room.LetterDataBase
 import com.krayapp.dictionarypj.data.room.LetterDataBaseImpl

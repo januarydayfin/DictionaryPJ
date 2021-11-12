@@ -16,7 +16,7 @@ class AboutLetterViewModel(
     private val repo: ILetterRepo,
     private val database: ILetterDataBase
 ) : ViewModel() {
-    private val dataScope = CoroutineScope(Dispatchers.IO)
+    private val dataScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var baseJob: Job? = null
 
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
@@ -24,9 +24,23 @@ class AboutLetterViewModel(
         get() = _mutableLiveData
 
     fun getData(letter: String) {
-        dataScope.launch {
+        baseJob?.cancel()
+        baseJob = dataScope.launch {
             repo.getLetterInfo(letter, callback)
         }
+    }
+
+    fun findLetterInLocalBase(letter: String) {
+        baseJob?.cancel()
+        baseJob = dataScope.launch {
+            val localText:AboutLetter? = database.getInfoByText(letter)
+            if(localText!= null){
+                _mutableLiveData.postValue(listOf(localText))
+            }else{
+                _mutableLiveData.postValue(listOf(AboutLetter("Letter not found in base", "Слово отсутствует в базе")))
+            }
+        }
+
     }
 
     private val callback = object : Callback<List<LetterInfo>> {
@@ -36,16 +50,14 @@ class AboutLetterViewModel(
         ) {
             val simpleList = convertToSimple(response.body()!!)
             _mutableLiveData.postValue(simpleList)
+            insertToDataBase(simpleList.first())
         }
-
         override fun onFailure(call: Call<List<LetterInfo>>, t: Throwable) {
             println(t)
         }
 
     }
-
-
-    fun insertToDataBase(letter: AboutLetter) {
+    private fun insertToDataBase(letter: AboutLetter) {
         baseJob?.cancel()
         baseJob =
             CoroutineScope(Dispatchers.IO)

@@ -8,6 +8,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.krayapp.dictionarypj.R.menu.main_toolbar
+import com.krayapp.dictionarypj.view.LocalSearchDialogFragment
 import com.krayapp.dictionarypj.view.Screens.SearchScreen
 import org.koin.android.ext.android.inject
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.history_menu ->{
-                router.replaceScreen(TODO())
+                LocalSearchDialogFragment().show(supportFragmentManager, "")
                 true
             }
             else -> super.onOptionsItemSelected(item)

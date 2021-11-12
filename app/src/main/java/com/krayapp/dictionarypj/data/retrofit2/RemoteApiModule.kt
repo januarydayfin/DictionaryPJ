@@ -1,9 +1,5 @@
-package com.krayapp.dictionarypj.data
+package com.krayapp.dictionarypj.data.retrofit2
 
-import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
-import dagger.Module
-import dagger.Provides
-import dagger.Reusable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
