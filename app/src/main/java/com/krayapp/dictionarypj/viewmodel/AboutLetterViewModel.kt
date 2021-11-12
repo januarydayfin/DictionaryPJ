@@ -14,7 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainFragmentViewModel(
+class AboutLetterViewModel(
     private val repo: ILetterRepo) : ViewModel() {
 
     private var disposables = CompositeDisposable()

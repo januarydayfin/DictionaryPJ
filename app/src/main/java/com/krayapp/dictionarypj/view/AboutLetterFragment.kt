@@ -2,50 +2,42 @@ package com.krayapp.dictionarypj.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.main_fragment
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.databinding.MainFragmentBinding
 import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
-import com.krayapp.dictionarypj.viewmodel.MainFragmentViewModel
+import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : IMainFragment, Fragment(main_fragment) {
+class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
     companion object {
-        fun newInstance(): Fragment {
-            return MainFragment()
+        private const val ARG_KEY = "ARG_KEY"
+        fun newInstance(letter:String): Fragment {
+            val newFrag = AboutLetterFragment()
+            newFrag.arguments = bundleOf(Pair(ARG_KEY, letter))
+            return newFrag
         }
     }
 
-    private val mainFragmentViewModel:MainFragmentViewModel by viewModel()
-
+    private val aboutLetterViewModel:AboutLetterViewModel by viewModel()
     private val viewBinding: MainFragmentBinding by viewBinding()
     private val mainFragmentAdapter = MainFragmentAdapter()
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        aboutLetterViewModel.getData(arguments?.getString(ARG_KEY)!!)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showLoading()
         viewBinding.letterRecycler.adapter = mainFragmentAdapter
-
-        mainFragmentViewModel.mutableLiveData.observe(viewLifecycleOwner, {
+        aboutLetterViewModel.mutableLiveData.observe(viewLifecycleOwner, {
             showLetterInfo(it)
+            showRecycler()
         })
-        viewBinding.loadButton.setOnClickListener {
-            showLoading()
-            viewBinding.letterRecycler.visibility = View.VISIBLE
-            val text = viewBinding.inputText.text.toString()
-            if (!text.equals("")) {
-                viewBinding.loadButton.visibility = View.INVISIBLE
-                viewBinding.inputText.visibility = View.INVISIBLE
-                mainFragmentViewModel.getData(text)
-            } else {
-                Toast.makeText(context, "Letter field is empty", Toast.LENGTH_SHORT).show()
-                viewBinding.inputText.hint = "Letter is empty"
-                viewBinding.load.root.visibility = View.INVISIBLE
-            }
-        }
     }
 
     override fun showLetterInfo(list: List<AboutLetter>) {
