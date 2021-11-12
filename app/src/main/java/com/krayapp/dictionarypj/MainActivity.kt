@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.krayapp.dictionarypj.R.menu.main_toolbar
 import com.krayapp.dictionarypj.view.Screens.MainFragmentScreen
-import com.krayapp.dictionarypj.R.menu.*
-import com.krayapp.movieapppoplib.view.abs.AbsActivity
 import org.koin.android.ext.android.inject
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 

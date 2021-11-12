@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.main_fragment
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.databinding.MainFragmentBinding
 import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
 import com.krayapp.dictionarypj.viewmodel.MainFragmentViewModel
-import com.krayapp.movieapppoplib.view.abs.AbsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import javax.inject.Inject
 
 class MainFragment : IMainFragment, Fragment(main_fragment) {
     companion object {
