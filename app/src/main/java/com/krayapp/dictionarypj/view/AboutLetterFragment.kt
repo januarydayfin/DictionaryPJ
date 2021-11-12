@@ -13,7 +13,7 @@ import com.krayapp.dictionarypj.view.adapter.AboutLetterAdapter
 import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AboutLetterFragment : Fragment(about_letter_fragment) {
+class AboutLetterFragment : Fragment(about_letter_fragment),AboutLetterAdapter.Delegate {
     companion object {
         private var localRequestStatus: Boolean = false
         private const val ARG_KEY = "ARG_KEY"
@@ -34,12 +34,13 @@ class AboutLetterFragment : Fragment(about_letter_fragment) {
 
     private val aboutLetterViewModel: AboutLetterViewModel by viewModel()
     private val viewBinding: AboutLetterFragmentBinding by viewBinding()
-    private val aboutLetterAdapter = AboutLetterAdapter()
+    private val aboutLetterAdapter = AboutLetterAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (localRequestStatus)
             aboutLetterViewModel.findLetterInLocalBase(arguments?.getString(ARG_KEY)!!)
+        //добавить скобку, если не нужно, чтобы подкачивал из сети
         aboutLetterViewModel.getData(arguments?.getString(ARG_KEY)!!)
     }
 
@@ -69,6 +70,10 @@ class AboutLetterFragment : Fragment(about_letter_fragment) {
     private fun showRecycler() {
         viewBinding.letterRecycler.visibility = View.VISIBLE
         viewBinding.load.root.visibility = View.INVISIBLE
+    }
+
+    override fun onLetterPicked(aboutLetter: AboutLetter) {
+        aboutLetterViewModel.openInLetter(aboutLetter)
     }
 
 }

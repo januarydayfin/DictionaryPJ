@@ -3,22 +3,25 @@ package com.krayapp.dictionarypj.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.terrakok.cicerone.Router
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.data.ILetterRepo
-import com.krayapp.dictionarypj.data.LetterInfo
+import com.krayapp.dictionarypj.data.retrofit2.letter.LetterInfo
 import com.krayapp.dictionarypj.data.room.ILetterDataBase
+import com.krayapp.dictionarypj.view.Screens.InLetterScreen
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class AboutLetterViewModel(
     private val repo: ILetterRepo,
-    private val database: ILetterDataBase
+    private val database: ILetterDataBase,
+    private val router: Router
 ) : ViewModel() {
     private val dataScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var baseJob: Job? = null
-
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
     val mutableLiveData: LiveData<List<AboutLetter>>
         get() = _mutableLiveData
@@ -33,11 +36,18 @@ class AboutLetterViewModel(
     fun findLetterInLocalBase(letter: String) {
         baseJob?.cancel()
         baseJob = dataScope.launch {
-            val localText:AboutLetter? = database.getInfoByText(letter)
-            if(localText!= null){
+            val localText: AboutLetter? = database.getInfoByText(letter)
+            if (localText != null) {
                 _mutableLiveData.postValue(listOf(localText))
-            }else{
-                _mutableLiveData.postValue(listOf(AboutLetter("Letter not found in base", "Слово отсутствует в базе")))
+            } else {
+                _mutableLiveData.postValue(
+                    listOf(
+                        AboutLetter(
+                            "Letter not found in base",
+                            "Слово отсутствует в базе"
+                        )
+                    )
+                )
             }
         }
 
@@ -52,11 +62,16 @@ class AboutLetterViewModel(
             _mutableLiveData.postValue(simpleList)
             insertToDataBase(simpleList.first())
         }
+
         override fun onFailure(call: Call<List<LetterInfo>>, t: Throwable) {
             println(t)
         }
-
     }
+
+    fun openInLetter(aboutLetter: AboutLetter) {
+        router.navigateTo(InLetterScreen(aboutLetter))
+    }
+
     private fun insertToDataBase(letter: AboutLetter) {
         baseJob?.cancel()
         baseJob =

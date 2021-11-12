@@ -1,7 +1,6 @@
 package com.krayapp.dictionarypj.data
 
-import com.krayapp.dictionarypj.data.LetterInfo
-import io.reactivex.Observable
+import com.krayapp.dictionarypj.data.retrofit2.letter.LetterInfo
 
 
 interface ILetterRepo {
