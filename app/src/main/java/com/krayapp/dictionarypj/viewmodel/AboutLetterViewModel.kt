@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.data.LetterInfo
+import com.krayapp.dictionarypj.data.room.LetterDataBase
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,10 +16,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class AboutLetterViewModel(
-    private val repo: ILetterRepo) : ViewModel() {
-
+    private val repo: ILetterRepo,
+    private val database:LetterDataBase
+    ) : ViewModel() {
     private var disposables = CompositeDisposable()
-
     private val dataScope = CoroutineScope(Dispatchers.IO)
 
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()

@@ -8,7 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.main_fragment
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.databinding.MainFragmentBinding
-import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
+import com.krayapp.dictionarypj.view.adapter.AboutLetterAdapter
 import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +24,7 @@ class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
 
     private val aboutLetterViewModel:AboutLetterViewModel by viewModel()
     private val viewBinding: MainFragmentBinding by viewBinding()
-    private val mainFragmentAdapter = MainFragmentAdapter()
+    private val mainFragmentAdapter = AboutLetterAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class AboutLetterFragment : IMainFragment, Fragment(main_fragment) {
     }
 
     override fun showLetterInfo(list: List<AboutLetter>) {
+        //тут можно взять первый элемент и вставить в базу
         mainFragmentAdapter.submitList(list)
         showRecycler()
     }
