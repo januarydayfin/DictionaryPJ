@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data.di.module
+package com.krayapp.dictionarypj.data.dagger.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

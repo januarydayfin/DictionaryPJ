@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data.di.module
+package com.krayapp.dictionarypj.data.dagger.module
 
 import com.krayapp.dictionarypj.MainActivity
 import com.krayapp.dictionarypj.data.ILetterRepo

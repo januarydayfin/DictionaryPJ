@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data.di.module
+package com.krayapp.dictionarypj.data.dagger.module
 
 import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
 import dagger.Module
@@ -10,12 +10,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class RemoteApiModule {
+    private val baseUrl:String = "https://dictionary.skyeng.ru/api/public/v1/"
     @Reusable
     @Provides
     fun getFromApi(): RemoteAccess =
         Retrofit.Builder()
-            .baseUrl("https://dictionary.skyeng.ru/api/public/v1/")
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .baseUrl(baseUrl)
             .addConverterFactory(
                 GsonConverterFactory.create()
             )
