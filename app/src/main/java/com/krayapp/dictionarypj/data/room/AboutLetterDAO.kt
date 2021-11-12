@@ -17,10 +17,4 @@ interface AboutLetterDAO {
     @Insert
     fun insertLetter(letter: AboutLetter)
 
-    @Query("SELECT text from AboutLetter")
-    fun getLetterList(): List<LetterTextOnly>
 }
-
-data class LetterTextOnly(
-    @ColumnInfo(name = "text")val text: String
-)

@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.data.LetterInfo
-import com.krayapp.dictionarypj.data.room.LetterDataBase
-import io.reactivex.disposables.CompositeDisposable
+import com.krayapp.dictionarypj.data.room.ILetterDataBase
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +14,7 @@ import retrofit2.Response
 
 class AboutLetterViewModel(
     private val repo: ILetterRepo,
-    private val database: LetterDataBase
+    private val database: ILetterDataBase
 ) : ViewModel() {
     private val dataScope = CoroutineScope(Dispatchers.IO)
     private var baseJob: Job? = null
@@ -52,7 +51,7 @@ class AboutLetterViewModel(
             CoroutineScope(Dispatchers.IO)
                 .launch {
                     if (isActive)
-                        database.letterDao().insertLetter(letter)
+                        database.insertLetter(letter)
                 }
     }
 

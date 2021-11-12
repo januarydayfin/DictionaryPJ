@@ -5,7 +5,9 @@ import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.krayapp.dictionarypj.data.retrofit2.RemoteAccess
+import com.krayapp.dictionarypj.data.room.ILetterDataBase
 import com.krayapp.dictionarypj.data.room.LetterDataBase
+import com.krayapp.dictionarypj.data.room.LetterDataBaseImpl
 import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,6 +27,7 @@ object Koin {
         }
         single<LetterDataBase> { Room.databaseBuilder(androidContext(),LetterDataBase::class.java, "letterDb.db")
             .build()}
+        single <ILetterDataBase>{ LetterDataBaseImpl(db = get()) }
         viewModel { AboutLetterViewModel(repo = get(),database = get()) }
     }
 }
