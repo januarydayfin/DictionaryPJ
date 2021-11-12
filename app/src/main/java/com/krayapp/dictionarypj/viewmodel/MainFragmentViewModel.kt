@@ -1,36 +1,40 @@
-package com.krayapp.dictionarypj.presenter
+package com.krayapp.dictionarypj.viewmodel
 
-import com.krayapp.dictionarypj.MySchedulers
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.krayapp.dictionarypj.ISchedulers
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.data.ILetterRepo
 import com.krayapp.dictionarypj.data.LetterInfo
-import com.krayapp.dictionarypj.view.IMainFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import javax.inject.Inject
 
-class MainFragmentPresenter(
-    private val view: IMainFragment,
-    private val repo: ILetterRepo
-) : IMainPresenter {
+class MainFragmentViewModel
+@Inject constructor(
+    private val repo: ILetterRepo,
+    private val schedulers: ISchedulers
+) : ViewModel() {
+
     private var disposables = CompositeDisposable()
 
-    private val schedulers = MySchedulers()
-    override fun loadLetterInfo(letter: String) {
+    private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
+    val mutableLiveData: LiveData<List<AboutLetter>>
+        get() = _mutableLiveData
+
+    fun getData(letter: String) {
         repo.getLetterInfo(letter)
             .map(::convertToSimple)
             .observeOn(schedulers.main())
-            .doOnNext(view::showLetterInfo)
-            .doOnError{error -> println("Retrofit Error $error")}
+            .doOnNext(_mutableLiveData::postValue)
+            .doOnError { error -> println("Retrofit Error $error") }
             .subscribeOn(schedulers.io())
             .subscribe()
             .addTo(disposables)
+
     }
 
-
-
-    override fun onStop() {
-        disposables.dispose()
-    }
 
     private fun convertToSimple(letterInfo: List<LetterInfo>): List<AboutLetter> {
         val newList = mutableListOf<AboutLetter>()
@@ -40,4 +44,8 @@ class MainFragmentPresenter(
         return newList
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        disposables.dispose()
+    }
 }

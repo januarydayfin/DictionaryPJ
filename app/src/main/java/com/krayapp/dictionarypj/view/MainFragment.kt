@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.main_fragment
 import com.krayapp.dictionarypj.data.AboutLetter
-import com.krayapp.dictionarypj.data.LetterRepoImpl
-import com.krayapp.dictionarypj.data.retrofit2.ApiHolder
 import com.krayapp.dictionarypj.databinding.MainFragmentBinding
-import com.krayapp.dictionarypj.presenter.MainFragmentPresenter
 import com.krayapp.dictionarypj.view.adapter.MainFragmentAdapter
+import com.krayapp.dictionarypj.viewmodel.MainFragmentViewModel
 import com.krayapp.movieapppoplib.view.abs.AbsFragment
+import javax.inject.Inject
 
 class MainFragment : IMainFragment, AbsFragment(main_fragment) {
     companion object {
@@ -21,7 +21,14 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
         }
     }
 
-    private val presenter by lazy { MainFragmentPresenter(this, LetterRepoImpl(ApiHolder.api)) }
+    @Inject
+    lateinit var modelFactory:ViewModelProvider.Factory
+    private lateinit var mainFragmentViewModel:MainFragmentViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainFragmentViewModel = ViewModelProvider(this,modelFactory)[MainFragmentViewModel::class.java]
+    }
 
     private val viewBinding: MainFragmentBinding by viewBinding()
     private val mainFragmentAdapter = MainFragmentAdapter()
@@ -31,6 +38,9 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.letterRecycler.adapter = mainFragmentAdapter
 
+        mainFragmentViewModel.mutableLiveData.observe(viewLifecycleOwner, {
+            showLetterInfo(it)
+        })
         viewBinding.loadButton.setOnClickListener {
             showLoading()
             viewBinding.letterRecycler.visibility = View.VISIBLE
@@ -38,7 +48,7 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
             if (!text.equals("")) {
                 viewBinding.loadButton.visibility = View.INVISIBLE
                 viewBinding.inputText.visibility = View.INVISIBLE
-                presenter.loadLetterInfo(text)
+                mainFragmentViewModel.getData(text)
             } else {
                 Toast.makeText(context, "Letter field is empty", Toast.LENGTH_SHORT).show()
                 viewBinding.inputText.hint = "Letter is empty"
@@ -54,7 +64,6 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
 
     override fun showLoading() {
         viewBinding.load.root.visibility = View.VISIBLE
-
     }
 
     private fun showRecycler() {
@@ -62,8 +71,4 @@ class MainFragment : IMainFragment, AbsFragment(main_fragment) {
         viewBinding.load.root.visibility = View.INVISIBLE
     }
 
-    override fun onStop() {
-        super.onStop()
-        presenter.onStop()
-    }
 }

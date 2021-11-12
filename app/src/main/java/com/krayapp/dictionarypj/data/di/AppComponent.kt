@@ -6,6 +6,8 @@ import com.github.terrakok.cicerone.Router
 import com.krayapp.dictionarypj.DictionaryApp
 import com.krayapp.dictionarypj.ISchedulers
 import com.krayapp.dictionarypj.data.di.module.MainModule
+import com.krayapp.dictionarypj.data.di.module.RemoteApiModule
+import com.krayapp.dictionarypj.data.di.module.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -14,7 +16,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, MainModule::class])
+@Component(modules = [AndroidInjectionModule::class, MainModule::class, RemoteApiModule::class, ViewModelModule::class])
 interface AppComponent: AndroidInjector<DictionaryApp> {
     @Component.Builder
     interface Builder{

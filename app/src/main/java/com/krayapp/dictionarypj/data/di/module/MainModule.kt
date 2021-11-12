@@ -1,7 +1,10 @@
 package com.krayapp.dictionarypj.data.di.module
 
 import com.krayapp.dictionarypj.MainActivity
+import com.krayapp.dictionarypj.data.ILetterRepo
+import com.krayapp.dictionarypj.data.LetterRepoImpl
 import com.krayapp.dictionarypj.view.MainFragment
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,4 +15,7 @@ interface MainModule {
 
     @ContributesAndroidInjector
     fun bindMovieFragment(): MainFragment
+
+    @Binds
+    fun bindLetterRepo(letterRepo:LetterRepoImpl):ILetterRepo
 }
