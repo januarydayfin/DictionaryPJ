@@ -1,8 +1,8 @@
-package com.krayapp.dictionarypj.data.room
+package com.krayapp.datamodule.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 
 
 @Database(

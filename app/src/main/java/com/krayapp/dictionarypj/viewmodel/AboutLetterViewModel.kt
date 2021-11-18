@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.terrakok.cicerone.Router
-import com.krayapp.dictionarypj.data.AboutLetter
-import com.krayapp.dictionarypj.data.ILetterRepo
-import com.krayapp.dictionarypj.data.retrofit2.letter.LetterInfo
-import com.krayapp.dictionarypj.data.room.ILetterDataBase
+import com.krayapp.datamodule.data.AboutLetter
+import com.krayapp.datamodule.data.ILetterRepo
+import com.krayapp.datamodule.data.retrofit2.letter.LetterInfo
+import com.krayapp.datamodule.data.room.ILetterDataBase
 import com.krayapp.dictionarypj.view.Screens.InLetterScreen
 import kotlinx.coroutines.*
 import retrofit2.Call

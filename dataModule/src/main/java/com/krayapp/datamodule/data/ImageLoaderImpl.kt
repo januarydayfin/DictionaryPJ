@@ -1,8 +1,7 @@
-package com.krayapp.dictionarypj.data
+package com.krayapp.datamodule.data
 
-import com.krayapp.dictionarypj.DictionaryApp
-import com.krayapp.dictionarypj.data.retrofit2.image.ImageDTO
-import com.krayapp.dictionarypj.data.retrofit2.image.ImageRemoteAccess
+import com.krayapp.datamodule.data.retrofit2.image.ImageDTO
+import com.krayapp.datamodule.data.retrofit2.image.ImageRemoteAccess
 import retrofit2.Callback
 
 class ImageLoaderImpl(

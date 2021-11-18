@@ -1,10 +1,9 @@
-package com.krayapp.dictionarypj.data.room
+package com.krayapp.datamodule.data.room
 
-import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 
 @Dao
 interface AboutLetterDAO {

@@ -15,5 +15,5 @@ koinAndroidCompat = "io.insert-koin:koin-android-compat:$koinVersion"
 
 //Retrofit
 retrofit2 = "com.squareup.retrofit2:retrofit:$retrofitVersion"
-refrofitConverterGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+retrofitConverterGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 }

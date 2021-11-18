@@ -1,13 +1,12 @@
-package com.krayapp.dictionarypj.data.retrofit2.image
+package com.krayapp.datamodule.data.retrofit2.image
 
-import com.krayapp.dictionarypj.DictionaryApp
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
 
 interface ImageRemoteAccess {
-    @Headers("Authorization: ${DictionaryApp.API_KEY}")
+    @Headers("Authorization: 563492ad6f917000010000010ba783552c754973b3f61180b87dee52")
     @GET("search")
     fun getImageFromApi(
         @Query("query") imageByLetter:String

@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data
+package com.krayapp.datamodule.data
 
 import android.os.Parcelable
 import androidx.room.Entity

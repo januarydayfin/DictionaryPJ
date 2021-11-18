@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 import com.krayapp.dictionarypj.databinding.InLetterFragmentBinding
 import com.krayapp.dictionarypj.viewmodel.InLetterViewModel
 import com.squareup.picasso.Picasso

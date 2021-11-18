@@ -1,7 +1,7 @@
-package com.krayapp.dictionarypj.data
+package com.krayapp.datamodule.data
 
-import com.krayapp.dictionarypj.data.retrofit2.letter.LetterInfo
-import com.krayapp.dictionarypj.data.retrofit2.letter.RemoteAccess
+import com.krayapp.datamodule.data.retrofit2.letter.LetterInfo
+import com.krayapp.datamodule.data.retrofit2.letter.RemoteAccess
 import retrofit2.Callback
 
 class LetterRepoImpl(

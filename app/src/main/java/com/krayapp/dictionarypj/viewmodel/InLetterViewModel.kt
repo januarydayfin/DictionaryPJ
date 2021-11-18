@@ -3,8 +3,8 @@ package com.krayapp.dictionarypj.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.krayapp.dictionarypj.data.IImageLoader
-import com.krayapp.dictionarypj.data.retrofit2.image.ImageDTO
+import com.krayapp.datamodule.data.IImageLoader
+import com.krayapp.datamodule.data.retrofit2.image.ImageDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

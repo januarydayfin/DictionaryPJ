@@ -1,6 +1,5 @@
-package com.krayapp.dictionarypj.data.retrofit2.image
+package com.krayapp.datamodule.data.retrofit2.image
 
-import com.krayapp.dictionarypj.data.retrofit2.letter.RemoteAccess
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

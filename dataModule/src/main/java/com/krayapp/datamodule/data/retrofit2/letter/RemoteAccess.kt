@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data.retrofit2.letter
+package com.krayapp.datamodule.data.retrofit2.letter
 
 import retrofit2.http.GET
 import retrofit2.http.Query

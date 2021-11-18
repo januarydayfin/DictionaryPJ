@@ -1,6 +1,6 @@
-package com.krayapp.dictionarypj.data.room
+package com.krayapp.datamodule.data.room
 
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 
 class LetterDataBaseImpl(
     private val db:LetterDataBase

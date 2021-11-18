@@ -1,4 +1,4 @@
-package com.krayapp.dictionarypj.data.retrofit2.letter
+package com.krayapp.datamodule.data.retrofit2.letter
 
 import com.google.gson.annotations.Expose
 

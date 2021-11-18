@@ -1,6 +1,6 @@
-package com.krayapp.dictionarypj.data
+package com.krayapp.datamodule.data
 
-import com.krayapp.dictionarypj.data.retrofit2.image.ImageDTO
+import com.krayapp.datamodule.data.retrofit2.image.ImageDTO
 import retrofit2.Callback
 
 interface IImageLoader {
