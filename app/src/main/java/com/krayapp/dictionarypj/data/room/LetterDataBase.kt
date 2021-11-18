@@ -6,7 +6,7 @@ import com.krayapp.dictionarypj.data.AboutLetter
 
 
 @Database(
-    exportSchema = true,
+    exportSchema = false,
     entities = [AboutLetter::class],
     version = 1
 )
