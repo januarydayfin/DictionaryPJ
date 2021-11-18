@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+apply from: "$project.rootDir/version.gradle"
+
 android {
     compileSdk 31
 
@@ -49,31 +51,27 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //Room
-    implementation "androidx.room:room-runtime:2.3.0"
-    implementation "androidx.room:room-ktx:2.3.0"
-    implementation "androidx.room:room-rxjava2:2.3.0"
-    kapt 'androidx.room:room-compiler:2.3.0'
+     //Room
+    implementation roomRuntime
+    implementation roomKtx
+    kapt roomCompiler
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
     //Koin
-    def koin_version= "3.1.2"
-    implementation "io.insert-koin:koin-core:$koin_version"
-    implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    implementation koinCore
+    implementation koinAndroid
+    implementation koinAndroidCompat
 
     //ViewBindingPropertyDelegate
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.0-beta01'
     implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.0-beta01'
 
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-
+    implementation retrofit2
+    implementation refrofitConverterGson
 
     //Recycler
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

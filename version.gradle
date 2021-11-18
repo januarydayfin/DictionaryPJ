@@ -1,0 +1,19 @@
+ext{
+roomVersion = "2.3.0"
+koinVersion = "3.1.2"
+retrofitVersion = "2.9.0"
+
+//Room
+roomRuntime = "androidx.room:room-runtime:$roomVersion"
+roomKtx = "androidx.room:room-ktx:$roomVersion"
+roomCompiler = "androidx.room:room-compiler:$roomVersion"
+
+//Koin
+koinCore = "io.insert-koin:koin-core:$koinVersion"
+koinAndroid = "io.insert-koin:koin-android:$koinVersion"
+koinAndroidCompat = "io.insert-koin:koin-android-compat:$koinVersion"
+
+//Retrofit
+retrofit2 = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+refrofitConverterGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+}
