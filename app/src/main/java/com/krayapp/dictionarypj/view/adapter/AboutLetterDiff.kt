@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.krayapp.dictionarypj.data.AboutLetter
 
-object MainFragmentDiff : DiffUtil.ItemCallback<AboutLetter>() {
+object AboutLetterDiff : DiffUtil.ItemCallback<AboutLetter>() {
 
     private val payload = Any()
 

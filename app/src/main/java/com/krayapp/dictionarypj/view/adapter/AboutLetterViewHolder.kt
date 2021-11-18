@@ -6,13 +6,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.data.AboutLetter
 import com.krayapp.dictionarypj.databinding.LetterTemplBinding
 
-class MainFragmentViewHolder(view: View):RecyclerView.ViewHolder(view) {
+class AboutLetterViewHolder(view: View):RecyclerView.ViewHolder(view) {
     private val viewBinding:LetterTemplBinding by viewBinding()
 
-    fun bind(aboutLetter: AboutLetter){
+    fun bind(aboutLetter: AboutLetter, delegate:AboutLetterAdapter.Delegate){
         with(viewBinding){
             letter.text = aboutLetter.text
             translation.text = aboutLetter.translation
+            root.setOnClickListener{
+                delegate.onLetterPicked(aboutLetter)
+            }
         }
     }
 }

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp">
 
     <EditText
+        android:importantForAutofill="no"
         android:inputType="text"
         android:id="@+id/input_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/input_letter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        />
 
     <Button
         android:id="@+id/load_button"
@@ -23,18 +22,19 @@
         android:text="@string/go"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_text" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_text"
+        app:layout_constraintVertical_bias="0.13" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/letter_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/letter_templ" />
+    <ImageView
+        android:id="@+id/test_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/load_button"
+        app:layout_constraintVertical_bias="0.24000001"
+        />
 
-    <include
-        android:id="@+id/load"
-        android:visibility="invisible"
-        layout="@layout/loading_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
