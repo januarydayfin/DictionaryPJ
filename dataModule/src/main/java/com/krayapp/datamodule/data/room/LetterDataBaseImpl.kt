@@ -8,7 +8,6 @@ class LetterDataBaseImpl(
     override fun getAll():List<AboutLetter> =
         db.letterDao().getAll()
 
-
     override fun getInfoByText(letter: String): AboutLetter =
         db.letterDao().getInfoByText(letter)
 

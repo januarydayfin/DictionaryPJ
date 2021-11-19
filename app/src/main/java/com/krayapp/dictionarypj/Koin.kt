@@ -19,26 +19,32 @@ import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import com.krayapp.dictionarypj.viewmodel.InLetterViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 object Koin {
     private val cicerone = Cicerone.create()
     fun getModule() = module {
+        scope(named("viewModelDataScope")) {
+            scoped<ILetterRepo> { LetterRepoImpl(api = get()) }
+            scoped<ILetterDataBase> { LetterDataBaseImpl(db = get()) }
+        }
+        single<Router> { cicerone.router }
         single<RemoteAccess> { RemoteApiModule().getFromApi() }
         single<ImageRemoteAccess> { RemoteImageModule().getFromApi() }
-        single<ILetterRepo> { LetterRepoImpl(api = get()) }
-        single<NavigatorHolder> {
-            cicerone
-                .getNavigatorHolder()
+        //single<ILetterRepo> { LetterRepoImpl(api = get()) }
+        single<NavigatorHolder> { cicerone.getNavigatorHolder() }
+        single<LetterDataBase> {
+            Room.databaseBuilder(
+                androidContext(),
+                LetterDataBase::class.java,
+                "letterDb.db"
+            )
+                .build()
         }
-        single<Router>{
-            cicerone.router
-        }
-        single<LetterDataBase> { Room.databaseBuilder(androidContext(),LetterDataBase::class.java, "letterDb.db")
-            .build()}
-        single <ILetterDataBase>{ LetterDataBaseImpl(db = get()) }
+        //single <ILetterDataBase>{ LetterDataBaseImpl(db = get()) }
         single<IImageLoader> { ImageLoaderImpl(api = get()) }
-        viewModel { AboutLetterViewModel(repo = get(),database = get(), router = get()) }
+        viewModel { AboutLetterViewModel(router = get()) }
         viewModel { InLetterViewModel(api = get()) }
     }
 }
