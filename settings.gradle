@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DictionaryPJ"
 include ':app'
+include ':dataModule'

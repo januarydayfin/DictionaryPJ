@@ -5,11 +5,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.krayapp.dictionarypj.R.layout.about_letter_fragment
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
+import com.krayapp.dictionarypj.R
 import com.krayapp.dictionarypj.databinding.AboutLetterFragmentBinding
 import com.krayapp.dictionarypj.view.adapter.AboutLetterAdapter
+import com.krayapp.dictionarypj.view.adapter.viewById
 import com.krayapp.dictionarypj.viewmodel.AboutLetterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +39,8 @@ class AboutLetterFragment : Fragment(about_letter_fragment),AboutLetterAdapter.D
     private val viewBinding: AboutLetterFragmentBinding by viewBinding()
     private val aboutLetterAdapter = AboutLetterAdapter(this)
 
+    private val letterRecycler by viewById<RecyclerView>(R.id.letter_recycler)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (localRequestStatus)
@@ -47,7 +52,7 @@ class AboutLetterFragment : Fragment(about_letter_fragment),AboutLetterAdapter.D
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoading()
-        viewBinding.letterRecycler.adapter = aboutLetterAdapter
+        letterRecycler.adapter = aboutLetterAdapter
         aboutLetterViewModel.mutableLiveData.observe(viewLifecycleOwner, {
             showLetterInfo(it)
             showRecycler()

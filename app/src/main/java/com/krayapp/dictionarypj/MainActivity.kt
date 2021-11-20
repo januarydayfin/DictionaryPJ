@@ -10,7 +10,11 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.krayapp.dictionarypj.R.menu.main_toolbar
 import com.krayapp.dictionarypj.view.LocalSearchDialogFragment
 import com.krayapp.dictionarypj.view.Screens.SearchScreen
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 
 class MainActivity : AppCompatActivity() {
 

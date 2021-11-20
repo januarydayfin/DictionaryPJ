@@ -3,7 +3,7 @@ package com.krayapp.dictionarypj.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 import com.krayapp.dictionarypj.R.layout.*
 
 class AboutLetterAdapter(

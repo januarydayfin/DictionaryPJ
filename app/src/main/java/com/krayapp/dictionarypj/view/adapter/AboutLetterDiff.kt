@@ -2,7 +2,7 @@ package com.krayapp.dictionarypj.view.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import com.krayapp.dictionarypj.data.AboutLetter
+import com.krayapp.datamodule.data.AboutLetter
 
 object AboutLetterDiff : DiffUtil.ItemCallback<AboutLetter>() {
 

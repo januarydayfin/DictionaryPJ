@@ -4,27 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.terrakok.cicerone.Router
-import com.krayapp.dictionarypj.data.AboutLetter
-import com.krayapp.dictionarypj.data.ILetterRepo
-import com.krayapp.dictionarypj.data.retrofit2.letter.LetterInfo
-import com.krayapp.dictionarypj.data.room.ILetterDataBase
+import com.krayapp.datamodule.data.AboutLetter
+import com.krayapp.datamodule.data.ILetterRepo
+import com.krayapp.datamodule.data.retrofit2.letter.LetterInfo
+import com.krayapp.datamodule.data.room.ILetterDataBase
 import com.krayapp.dictionarypj.view.Screens.InLetterScreen
 import kotlinx.coroutines.*
+import org.koin.core.qualifier.named
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import org.koin.core.scope.Scope
+import org.koin.java.KoinJavaComponent.getKoin
 
 
 class AboutLetterViewModel(
-    private val repo: ILetterRepo,
-    private val database: ILetterDataBase,
     private val router: Router
 ) : ViewModel() {
     private val dataScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var baseJob: Job? = null
+
+    private val scope:Scope by lazy{getKoin().createScope("", named("viewModelDataScope"))}
+    private val repo: ILetterRepo = scope.get<ILetterRepo>()
+    private val database: ILetterDataBase = scope.get<ILetterDataBase>()
+
     private val _mutableLiveData = MutableLiveData<List<AboutLetter>>()
     val mutableLiveData: LiveData<List<AboutLetter>>
         get() = _mutableLiveData
+
 
     fun getData(letter: String) {
         baseJob?.cancel()

@@ -10,13 +10,16 @@ import com.krayapp.dictionarypj.databinding.SearchLayoutBinding
 import com.krayapp.dictionarypj.view.Screens.AboutLetterScreen
 import org.koin.android.ext.android.inject
 import com.krayapp.dictionarypj.R.layout.*
+import org.koin.android.ext.android.getKoin
+import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 
 
 class SearchFragment: Fragment(search_layout) {
     companion object {
         fun newInstance():Fragment = SearchFragment()
     }
-    private val router: Router by inject()
+     private val router: Router by inject()
     private val viewBinding:SearchLayoutBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
