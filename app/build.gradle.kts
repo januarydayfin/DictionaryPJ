@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.krayapp.dictionarypj"
-        minSdk = 28
+        minSdk = 31
         targetSdk = 31
         versionCode = 1
         versionName = "1.0"
