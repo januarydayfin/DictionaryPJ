@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.DictionaryPJ" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/ocean_blue</item>
+        <item name="colorPrimaryVariant">@color/teal_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="fontFamily">sans-serif-condensed-light</item>
+        <item name="bottomBorderColor">@color/transparentBlack</item>
+        <item name="android:textSize">20dp</item>
+        <item name="homeMenuColor">@color/white</item>
+        <item name="android:windowSplashScreenBackground">#D3E8C591</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/doge</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">#00018786</item>
+    </style>
+</resources>
